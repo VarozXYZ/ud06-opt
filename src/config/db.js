@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-async function connectDB(uri = process.env.MONGODB_URI) {
+async function connectDB(uri = process.env.MONGO_URL || process.env.MONGODB_URI) {
   if (!uri) {
-    throw new Error("MONGODB_URI is required");
+    throw new Error("MONGO_URL or MONGODB_URI is required");
   }
 
   mongoose.set("strictQuery", true);

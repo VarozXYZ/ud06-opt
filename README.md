@@ -49,4 +49,4 @@ En Render configura:
 - Build Command: `npm ci`
 - Start Command: `npm start`
 - Health Check Path: `/health`
-- Environment Variable: `MONGODB_URI`
+- Environment Variable: `MONGODB_URI` o `MONGO_URL`

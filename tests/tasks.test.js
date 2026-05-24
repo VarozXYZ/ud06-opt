@@ -8,8 +8,13 @@ let mongoServer;
 let app;
 
 beforeAll(async () => {
-  mongoServer = await MongoMemoryServer.create();
-  await connectDB(mongoServer.getUri());
+  if (process.env.MONGO_URL || process.env.MONGODB_URI) {
+    await connectDB();
+  } else {
+    mongoServer = await MongoMemoryServer.create();
+    await connectDB(mongoServer.getUri());
+  }
+
   app = createApp();
 });
 
@@ -19,7 +24,10 @@ afterEach(async () => {
 
 afterAll(async () => {
   await disconnectDB();
-  await mongoServer.stop();
+
+  if (mongoServer) {
+    await mongoServer.stop();
+  }
 });
 
 test("GET /health returns API and database status", async () => {
