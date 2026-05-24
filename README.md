@@ -50,3 +50,7 @@ En Render configura:
 - Start Command: `npm start`
 - Health Check Path: `/health`
 - Environment Variable: `MONGODB_URI` o `MONGO_URL`
+
+## Captura del despliegue
+
+![Despliegue correcto en Render](screenshots/render-deploy.png)
