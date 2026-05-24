@@ -31,3 +31,22 @@ npm run test:coverage
 - `GET /health` comprueba API y conexion con MongoDB.
 - `GET /api/tasks` lista tareas.
 - `POST /api/tasks` crea una tarea con `{ "title": "Texto" }`.
+
+## GitHub Actions y Render
+
+El workflow `.github/workflows/ci-render.yml` instala dependencias, ejecuta tests, calcula cobertura, construye una imagen Docker y lanza el despliegue en Render si todo pasa.
+
+Para activar el despliegue automatico, crea en GitHub el secret:
+
+```text
+RENDER_DEPLOY_HOOK_URL
+```
+
+Su valor debe ser el deploy hook de tu servicio en Render.
+
+En Render configura:
+
+- Build Command: `npm ci`
+- Start Command: `npm start`
+- Health Check Path: `/health`
+- Environment Variable: `MONGODB_URI`
